@@ -1,4 +1,4 @@
-import datetime, time, math, requests, praw, random
+import datetime, time, math, requests, praw, random, atexit
 from hashlib import sha256
 import logging
 
@@ -47,7 +47,9 @@ class Network():
 
         logging.basicConfig(level=logging.DEBUG, filename='logged.log', format='%(asctime)s %(levelname)s:%(message)s')
         self.log = logging.getLogger(__name__)
-
+        
+        atexit.register(self.exit_handler)
+        self.main_submission = False
         logging.debug('Start')
 
         self.main()
@@ -143,10 +145,14 @@ class Network():
         for i in range(self.batch_size - new_user_submissions_length):
             submissions.append(self.r.subreddit(self.subreddit).random())
         return submissions
+    
+    def exit_handler(self):
+        if not self.main_submission == False:
+            self.main_submission.delete()
 
     def main(self):
         self.deletePreviousPosts()
-        main_submission = self.generateSubmission()
+        self.main_submission = self.generateSubmission()
 
         while True:
             # Calculate time blocks beforehand which will ensure proper maintained order and valid nonces
@@ -175,7 +181,7 @@ class Network():
                     logging.debug('Submission error? Returned: "' + str(e) + '", retrying..')
             
             # Update user post to ensure nonce remains valid
-            self.updateSubmission(main_submission, next_time_block)
+            self.updateSubmission(self.main_submission, next_time_block)
 
 if __name__ == '__main__':
     import praw

@@ -18,7 +18,8 @@ setup(
             'praw',
             'random',
             'hashlib',
-            'loggin'    
+            'logging',
+            'atexit'
       ],
 
   classifiers=[

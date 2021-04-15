@@ -1,5 +1,5 @@
 # Karma Farmer
-Generates karma for user running script by participating in r/KarmaStreet, where this script uploads a post for a user and upvotes other active users. This is kinda a side project for me but there is some more work to do before its a final project, so if it gains traction ill go back to it but for now this is it. 
+Generates karma for user running this script by participating in r/KarmaStreet, where it uploads a post for a user and upvotes other active users. This was kinda a side project for me however if it gains attraction I'll possibly add new features. Nevertheless it works as is. Now it just needs more participating users...
 
 ### Python Installation
 Linux:

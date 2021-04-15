@@ -15,7 +15,7 @@ python -m pip install KarmaFarmer
 ```
 Create a python file called script-name.py:
 ```python
-import KarmaFarmer
+from KarmaFarmer import KarmaFarmer
 import praw
 r = praw.Reddit(client_id='client-id-example', client_secret='client-secret-example', user_agent='karmafarmer', username='JohnSmith', password='password123')
 KarmaFarmer.Network(r)
